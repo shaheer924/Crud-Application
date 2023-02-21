@@ -25,6 +25,11 @@ class taskController extends baseController{
 
         this.apiResponse('Task completed successfully', 200, res)
     }
+
+    getAll = async (req, res, next) => {
+        const data = await this.model.find(req.query).populate('user_id')
+        this.apiResponse('record fetched successfully', 200, res, data)
+    }
 }
 
 module.exports = new taskController()
