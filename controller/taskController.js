@@ -12,7 +12,7 @@ class taskController extends baseController{
 
         const task = await this.model.findOne({_id: taskId})
 
-        if(task.due_date > Date.now()){
+        if(new Date(task.due_date) > new Date()){
             await this.model.update({_id: taskId}, {
                 status: 'completed'
             })

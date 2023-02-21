@@ -12,6 +12,7 @@ router.get('/user', userController.getAll)
 
 router.get('/task',taskController.getAll)
 router.get('/user/dashboard', userController.dashboard)
+router.get('/task/complete/:id', taskController.completeTask)
 
 //can only be used by superuser
 router.all('*', RoleMiddleware)
