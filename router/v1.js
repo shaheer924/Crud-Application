@@ -7,9 +7,11 @@ const RoleMiddleware = require('./../middleware/RoleMiddleware')
 const router = express.Router()
 
 router.post('/user/login', userController.login)
-router.all('*',AuthenticationMiddleware)
+router.all('*', AuthenticationMiddleware)
+router.get('/user', userController.getAll)
 
 router.get('/task',taskController.getAll)
+router.get('/user/dashboard', userController.dashboard)
 
 //can only be used by superuser
 router.all('*', RoleMiddleware)

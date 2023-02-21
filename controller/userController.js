@@ -2,6 +2,7 @@ const baseController = require('./baseController')
 const User = require('./../models/userModel')
 const AppError = require("../middleware/AppError");
 const jwt = require("jsonwebtoken");
+const Task = require("../models/taskModel");
 
 class userController extends baseController {
     constructor() {
@@ -44,7 +45,23 @@ class userController extends baseController {
         }catch (e) {
             return next(new AppError('Error', 500, e))
         }
+    }
 
+    dashboard = async (req, res, next ) => {
+        let data = []
+        const user = await User.count()
+        data.push({ title: 'Total Users', count: user})
+
+        const task = await Task.count()
+        data.push({title: 'Total Tasks', count: task})
+
+        const pending = await Task.count({status: 'pending'})
+        data.push({title: 'Total Pending Task', count: pending})
+
+        const completed = await Task.count({status: 'completed'})
+        data.push({title: 'Total Completed Task', count: completed})
+
+        this.apiResponse('record fetched successfully', 200, res, data)
     }
 }
 
