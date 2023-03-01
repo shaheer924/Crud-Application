@@ -51,9 +51,11 @@ class App {
     }
 
     initializeScheduleTask(){
-        schedule.scheduleJob('0 0 */1 * * *', function(){  // this for one hour
+        schedule.scheduleJob('0 0 1 * * *', function(){  // this for one hour
             scheduleTask().then((r)=>{
-                console.log("Schedule Running")
+                console.log('Schedule run at', new Date())
+            }).catch(err=>{
+                console.log(err)
             })
         });
 
