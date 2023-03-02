@@ -51,6 +51,6 @@ userSchema.methods.correctPassword = async function(
     return await bcrypt.compare(candidatePassword, userPassword);
 }
 
-const User = model('User', userSchema)
+const User = model('users', userSchema)
 
 module.exports = User
